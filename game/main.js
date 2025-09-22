@@ -1,34 +1,80 @@
-document.getElementById("txt").innerText="これはゲームです";
 const canvas =document.getElementById("gameCanvas");
 const ctx=canvas.getContext("2d");
+
+const player ={
+  x:canvas.width / 2-15,
+  y:canvas.height-60,
+  width:30,
+  height:30,
+  color:"yellow",
+  life:3,
+};
+
+const bullets=[];
+const BULLET_SPEED=-10;
+
+function tryShoot(){
+  bullets.push({
+    x: player.x,
+    y:player.y,
+    width:1000,
+    height:1000,
+    vy:BULLET_SPEED,
+  })
+}
 //width="480" height="640"
-let x=225;
+
 window.addEventListener("keydown",(e)=>{
   if (e.key ==="ArrowLeft") {
-    x -=10;
+   player.x -=10;
   } else if (e.key ==="ArrowRight"){
-    x+=10;
+   player.x+=10;
+  }else if(e.code ==="Space"){
+    tryShoot();
   }
 });
-let y1 =0;
-let y2 =-150;
-function gameLoop(){
+function update(){
+for(let)
+  bullet.y +=bullet.vy;
+  if(bullet.y<0){
+      bullets.splice(i,1);
+
+}
+function draw(){
 ctx.fillStyle="black";
 ctx.fillRect(0,0,canvas.width,canvas.height);
-ctx.fillStyle="red";
-ctx.fillRect(300,y1,30,30);
-y1+=5;
-ctx.fillStyle="red";
-ctx.fillRect(300,y2,30,30);
-y2+=5;
-ctx.fillStyle="blue";
-ctx.fillRect(x,480,30,30);
-if (tama >0) {
-  ctx.fillStyle="white";
-  ctx.fillRect(x+10,480-tama*10,10,10);
-}
 
-requestAnimationFrame(gameLoop);
+ctx.fillStyle=player.color;
+ctx.fillRect(player.x,player.y,player.width,player.height);
+
+ctx.fillStyle="red";
+for(let i=bullets.length - 1;i>=0;i--) {
+    const bullet=bullets[i];
+    ctx.fillRect(bullet.x,bullet.y,bullet.width,bullet.height);
+}
+function gameLoop(){
+
+
+
+
+bullets.forEach(bullet=>{
+  ctx.fillStyle="red";
+  
+
+  
+    
+    ctx.fillRect(bullet.x,bullet.y,bullet.width,bullet.height);
+    
+    }
+    console.log(bullet);
+  }
+});
+
+
+requestAnimationFrame(gameLoop);{
+  update();
+  draw();
+}
 }
 
 gameLoop();
