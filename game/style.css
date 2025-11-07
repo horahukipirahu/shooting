@@ -9,8 +9,13 @@ body {
 }
 
 #gameCanvas {
-  background: #ffffff;
+  background: #e8e8eb;
   border: 2px solid #000000;
   box-shadow: 0 4px 24px rgba(0,0,0,0.3);
   display: block;
+}
+
+#lifeBoard,#scoreBoard{
+  color:#450ae7;
+  font-size:45px;
 }

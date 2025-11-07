@@ -1,13 +1,13 @@
 
 import { player, initPlayer, drawPlayer } from "./player.js";
-import { spawnEnemy, enemies,updateEnemies,drawEnemies} from "./enemies.js";
-import {handleCollisions}from"./collisions";
+import { spawnEnemy, enemies, updateEnemies, drawEnemies } from "./enemies.js";
+import { handleCollisions } from "./collision.js";
 
 const canvas = document.getElementById("gameCanvas");
 const ctx = canvas.getContext("2d");
 
+
 initPlayer(canvas);
-updateEnemies(canvas);
 
 export const bullets = [];
 const BULLET_SPEED = -5;
@@ -20,6 +20,12 @@ function tryShoot() {
         height: 10,
         vy: BULLET_SPEED,
     })
+}
+function updatescore(){
+    const scoreBoard =document.getElementById("scoreBoard");
+    scoreBoard.innerText=`score:`+player.score;
+    const lifeBoard=document.getElementById("lifeBoard");
+    lifeBoard.innerText=`Life:` +player.life;
 }
 
 
@@ -45,9 +51,11 @@ function update() {
             bullets.splice(i, 1);
         }
     }
-    spawnEnemy(canvas);
+    spawnEnemy(canvas);    
     updateEnemies(canvas);
-    hamdleCollisions();
+    handleCollisions();
+
+    updatescore();
 }
 
 function draw() {
@@ -62,7 +70,7 @@ function draw() {
         ctx.fillRect(bullet.x, bullet.y, bullet.width, bullet.height);
     }
 
-   drawEnemies(ctx);
+    drawEnemies(ctx);
 }
 
 function gameLoop() {
