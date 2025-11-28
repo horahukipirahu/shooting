@@ -18,7 +18,7 @@ export function handleCollisions() {
         bullets.splice(bi, 1);
         enemies.splice(ei, 1);
         player.score += 1;
-        console.log("Score:",player.score)
+        console.log("Score:", player.score);
         hit = true;
         break; // この敵は消えたので次の敵へ
       }
@@ -34,12 +34,12 @@ export function handleCollisions() {
       { x: player.x, y: player.y, width: player.width, height: player.height },
       { x: e.x, y: e.y, width: e.width, height: e.height }
     )) {
-      player.life -=1;
-      if(player.life<=0){
+      player.life -= 1;
+      if(player.life <= 0) {
         document.location.reload();
       }
-      enemies.splice(ei,1);
-      console.log("plyer Life:",player.life)
+      enemies.splice(ei, 1);
+      console.log("Player Life:", player.life);
     //   isGameOver = true;
       break;
     }
