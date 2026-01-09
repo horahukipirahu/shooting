@@ -12,15 +12,61 @@ mapImage.src = "map.png";
 initPlayer(canvas);
 
 export const bullets = [];
-const BULLET_SPEED = -5;
+const BULLET_SPEED = -10;
+const BULLET_SPEED2 =-9;
+const BULLET_SPEED3 =-8;
+const BULLET_SPEED4 =10;
+const BULLET_SPEED5 =9;
+const BULLET_SPEED6 =8;
 
 function tryShoot() {
     bullets.push({
-        x: player.x + player.width / 200 - 500,
+        x: player.x + player.width / 2 - 5,
         y: player.y,
-        width: 1000,
+        width: 10,
         height: 10,
+        vx:0,
         vy: BULLET_SPEED,
+    },
+    {
+        x: player.x + player.width / 2 - 5,
+        y: player.y,
+        width: 10,
+        height: 10,
+        vx:5,
+        vy: BULLET_SPEED2,
+    },
+    {
+        x: player.x + player.width / 2 - 5,
+        y: player.y,
+        width: 10,
+        height: 10,
+        vx:-5,
+        vy: BULLET_SPEED3,
+    },
+    {
+        x: player.x + player.width / 2 - 5,
+        y: player.y,
+        width: 10,
+        height: 10,
+        vx:10,
+        vy: BULLET_SPEED4,
+    },
+    {
+        x: player.x + player.width / 2 - 5,
+        y: player.y,
+        width: 10,
+        height: 10,
+        vx:-10,
+        vy: BULLET_SPEED5,
+    },
+    {
+        x: player.x + player.width / 2 - 5,
+        y: player.y,
+        width: 10,
+        height: 10,
+        vx:-15,
+        vy: BULLET_SPEED6,
     })
 }
 
@@ -40,6 +86,14 @@ window.addEventListener("keydown", (e) => {
         if (player.x < canvas.width - player.width - 10) {
             player.x += 10;
         }
+    } else if (e.key === "ArrowUp") {
+        if (player.y >10) {
+            player.y -= 10;
+        }
+    } else if (e.key === "ArrowDown") {
+        if (player.y < canvas.height - player.height - 10) {
+            player.y += 10;
+        }        
     } else if (e.code === "Space") {
         tryShoot();
     }
@@ -49,6 +103,7 @@ function update() {
     for (let i = 0; i < bullets.length; i++) {
         const bullet = bullets[i];
         bullet.y += bullet.vy;
+        bullet.x +=bullet.vx;
         if (bullet.y < 0) {
             bullets.splice(i, 1);
         }
